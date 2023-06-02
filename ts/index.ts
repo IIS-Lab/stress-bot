@@ -1,6 +1,7 @@
 import {
     counter,
     getRandom,
+    getRandomVideo,
     imageId,
     indexKeyList,
     redirectTo404,
@@ -90,6 +91,8 @@ const setPositionOfVideos = () => {
         { x: getRandom() + 75 - xMargin, y: getRandom() + 79.5 - yMargin },
     ];
 
+    const videoFileName = getRandomVideo();
+
     indexKeyList.map((index) => {
         const element = document.getElementById(`w-${index}`);
 
@@ -97,6 +100,14 @@ const setPositionOfVideos = () => {
 
         element.style.left = positionList[index].x + "vw";
         element.style.top = positionList[index].y + "vh";
+
+        const explosionVideo = document.getElementById(
+            `v-${index}`
+        ) as HTMLVideoElement | null;
+
+        if (!explosionVideo) return;
+        // video の src を設定
+        explosionVideo.src = `./public/${videoFileName}`;
     });
 };
 
